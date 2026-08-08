@@ -1,4 +1,4 @@
-"""
+﻿"""
 MAIN FLASK APPLICATION for F and B Poultry Farm Limited
 ======================================================
 This is the main server file. It handles ALL API requests from the frontend.
@@ -75,7 +75,7 @@ def init_db():
                         email='douglasglayeboah633@gmail.com',
                         password_hash=admin_password,
                         role='admin',
-                        phone='054411993',
+                        phone='0544911993',
                         is_verified=True
                     )
                     db.session.add(admin)
@@ -1174,7 +1174,7 @@ if __name__ == '__main__':
                 email='douglasglayeboah633@gmail.com',
                 password_hash=admin_password,
                 role='admin',
-                phone='054411993',
+                phone='0544911993',
                 is_verified=True
             )
             db.session.add(admin)
