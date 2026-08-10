@@ -109,6 +109,7 @@ let emoji = '';
                             <h3 class="card-title">${product.name}</h3>
                             <p class="card-text">${product.description || 'No description'}</p>
                             <div class="card-price">GHS ${product.price.toFixed(2)}</div>
+                            ${product.description && product.description.toLowerCase().includes('discount') ? '<div style="color:#ff6f00;font-size:0.85rem;font-weight:600;">📦 Bulk discount available!</div>' : ''}
                             <div class="card-stock">${stockStatus}</div>
                             ${product.stock_quantity > 0 ? `
                                 <div class="form-group" style="margin-bottom:10px;">

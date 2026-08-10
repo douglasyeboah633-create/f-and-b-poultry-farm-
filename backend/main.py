@@ -90,6 +90,38 @@ def init_db():
 # HELPER FUNCTIONS
 # ============================================================
 
+def update_product_prices():
+    """Update product prices and descriptions to new values"""
+    price_updates = {
+        "Broiler Chicken (Live)": {
+            "price": 150.00,
+            "description": "Healthy broiler chicken ready for sale. Weight: 2-3kg. Buy more and enjoy discounts!"
+        },
+        "Layers Chicken (Live)": {
+            "price": 100.00,
+            "description": "Mature laying hen ready for egg production. Buy more and enjoy discounts!"
+        },
+        "Crate of Fresh Eggs (30 pcs)": {
+            "price": 50.00,
+            "description": "Farm-fresh eggs straight from our healthy layers. 30 eggs per crate. Buy more and enjoy discounts!"
+        },
+    }
+    
+    updated = 0
+    for name, updates in price_updates.items():
+        product = Product.query.filter_by(name=name).first()
+        if product:
+            product.price = updates["price"]
+            product.description = updates["description"]
+            updated += 1
+    
+    if updated > 0:
+        db.session.commit()
+        print(f"[OK] Updated prices for {updated} products")
+    else:
+        print("[INFO] No products to update (database may already be updated)")
+
+
 def admin_required():
     """Check if the current user is an admin"""
     current_user_id = get_jwt_identity()
@@ -1164,6 +1196,9 @@ if __name__ == '__main__':
         # Create all database tables
         db.create_all()
         print("[OK] Database tables created successfully!")
+        
+        # Update product prices
+        update_product_prices()
         
         # Check if admin user exists, if not create one
         admin = User.query.filter_by(role='admin').first()

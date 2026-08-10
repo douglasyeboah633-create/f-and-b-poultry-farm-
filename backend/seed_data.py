@@ -31,89 +31,28 @@ def seed():
         
         # ----- SAMPLE PRODUCTS -----
         products = [
-            # Eggs
-            Product(
-                name="Crate of Fresh Eggs (30 pcs)",
-                category="eggs",
-                price=3500.00,
-                stock_quantity=50,
-                description="Farm-fresh eggs straight from our healthy layers. 30 eggs per crate.",
-                image_url=""
-            ),
-            Product(
-                name="Tray of Eggs (12 pcs)",
-                category="eggs",
-                price=1500.00,
-                stock_quantity=100,
-                description="A dozen fresh eggs perfect for your family.",
-                image_url=""
-            ),
-            Product(
-                name="Half Crate of Eggs (15 pcs)",
-                category="eggs",
-                price=2000.00,
-                stock_quantity=75,
-                description="Half crate of fresh eggs - just the right amount.",
-                image_url=""
-            ),
-            
-            # Chickens
             Product(
                 name="Broiler Chicken (Live)",
                 category="chickens",
-                price=4500.00,
+                price=150.00,
                 stock_quantity=30,
-                description="Healthy broiler chicken ready for sale. Weight: 2-3kg.",
+                description="Healthy broiler chicken ready for sale. Weight: 2-3kg. Buy more and enjoy discounts!",
                 image_url=""
             ),
             Product(
                 name="Layers Chicken (Live)",
                 category="chickens",
-                price=5000.00,
+                price=100.00,
                 stock_quantity=25,
-                description="Mature laying hen ready for egg production.",
+                description="Mature laying hen ready for egg production. Buy more and enjoy discounts!",
                 image_url=""
             ),
             Product(
-                name="Day-Old Chicks (Broiler)",
-                category="chickens",
-                price=800.00,
-                stock_quantity=200,
-                description="Just hatched broiler chicks. Vaccinated and healthy.",
-                image_url=""
-            ),
-            
-            # Feeds
-            Product(
-                name="Broiler Starter Feed (50kg)",
-                category="feeds",
-                price=12500.00,
-                stock_quantity=20,
-                description="High-quality starter feed for broiler chicks (0-4 weeks).",
-                image_url=""
-            ),
-            Product(
-                name="Layers Feed (50kg)",
-                category="feeds",
-                price=11000.00,
-                stock_quantity=15,
-                description="Complete feed for laying hens. Produces strong eggshells.",
-                image_url=""
-            ),
-            Product(
-                name="Growers Feed (50kg)",
-                category="feeds",
-                price=9500.00,
-                stock_quantity=18,
-                description="Feed for growing chickens (5-16 weeks).",
-                image_url=""
-            ),
-            Product(
-                name="Chick Mash (25kg)",
-                category="feeds",
-                price=6500.00,
-                stock_quantity=25,
-                description="Fine mash for day-old chicks. Easy to digest.",
+                name="Crate of Fresh Eggs (30 pcs)",
+                category="eggs",
+                price=50.00,
+                stock_quantity=50,
+                description="Farm-fresh eggs straight from our healthy layers. 30 eggs per crate. Buy more and enjoy discounts!",
                 image_url=""
             ),
         ]
@@ -135,9 +74,9 @@ def seed():
         print("[OK] Added welcome announcement")
         print("")
         print("[SUMMARY] Sample Data:")
-        print("   - Fresh Eggs: 3 products")
-        print("   - Chickens: 3 products")
-        print("   - Feeds: 4 products")
+        print("   - Fresh Eggs: 1 product")
+        print("   - Chickens: 2 products")
+        print("   - Feeds: 0 products")
         print("   - Announcements: 1")
         print("")
         print("[DONE] Database seeded successfully!")
