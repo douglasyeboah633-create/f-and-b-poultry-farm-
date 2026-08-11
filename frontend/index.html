@@ -319,16 +319,6 @@
         </div>
     </div>
 
-<!-- ========== PRODUCTS SHOWCASE ========== -->
-    <div class="container">
-        <h2 class="section-title">Our Products 🛒</h2>
-        <p style="text-align:center;color:#666;margin-bottom:30px;">Fresh from our farm to your table — browse our quality products!</p>
-        <div id="home-products" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;"></div>
-        <div style="text-align:center;margin-top:30px;">
-            <a href="/pages/products.html" class="btn btn-primary">View All Products →</a>
-        </div>
-    </div>
-
     <!-- ========== FEATURES ========== -->
     <div class="container">
         <h2 class="section-title">Why Choose Us?</h2>
@@ -466,54 +456,6 @@
     <!-- Load JavaScript -->
     <script src="js/main.js"></script>
     <script>
-// Load products for the home page showcase
-        async function loadHomeProducts() {
-            const container = document.getElementById('home-products');
-            if (!container) return;
-            
-            try {
-                const response = await fetch('/api/products');
-                const products = await response.json();
-                
-                if (products.length === 0) {
-                    container.innerHTML = '<p style="text-align:center;color:#888;">Products coming soon!</p>';
-                    return;
-                }
-                
-                // Show first 6 products
-                const display = products.slice(0, 6);
-                
-                let html = '';
-                display.forEach(product => {
-                    const inStock = product.stock_quantity > 0;
-                    const stockText = inStock 
-                        ? `<span style="color:#2e7d32;font-weight:600;">✓ In Stock (${product.stock_quantity})</span>` 
-                        : '<span style="color:#d32f2f;font-weight:600;">✗ Out of Stock</span>';
-                    
-                    html += `
-                        <div class="card">
-                            <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);">
-                                <span>${product.category === 'eggs' ? '🥚' : product.category === 'chickens' ? '🐔' : '🌾'}</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge">${product.category}</span>
-                                <h3 class="card-title">${product.name}</h3>
-                                <p class="card-text">${product.description || ''}</p>
-                                <div class="card-price">GHS ${product.price.toFixed(2)}</div>
-                                ${product.description && product.description.toLowerCase().includes('discount') ? '<div style="color:#ff6f00;font-size:0.85rem;font-weight:600;">📦 Bulk discount available!</div>' : ''}
-                                <div class="card-stock">${stockText}</div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                container.innerHTML = html;
-                
-            } catch (error) {
-                container.innerHTML = '<p style="text-align:center;color:#888;">Browse our products on the Products page!</p>';
-            }
-        }
-
         // Load announcements from the backend
         async function loadAnnouncements() {
             const container = document.getElementById('ads-container');
@@ -549,9 +491,8 @@
             }
         }
         
-// Run on page load
+        // Run on page load
         document.addEventListener('DOMContentLoaded', function() {
-            loadHomeProducts();
             loadAnnouncements();
         });
     </script>
