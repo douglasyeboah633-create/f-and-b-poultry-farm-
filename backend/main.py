@@ -31,7 +31,7 @@ CORS(app)
 basedir = Path(__file__).resolve().parent
 
 # Use /tmp directory for cloud platforms (writable), otherwise use local directory
-if os.environ.get('FLY_APP_NAME') or os.environ.get('VERCEL'):
+if os.environ.get('FLY_APP_NAME') or os.environ.get('VERCEL') or os.environ.get('RENDER'):
     db_path = '/tmp/database.db'
 else:
     db_path = basedir / 'database.db'
@@ -57,66 +57,66 @@ jwt = JWTManager(app)
 # ============================================================
 # INIT DATABASE ON FIRST REQUEST
 # ============================================================
-    @app.before_request
-    def init_db():
-        """Initialize database on first request"""
-        if not hasattr(app, 'db_initialized'):
-            with app.app_context():
-                try:
-                    db.create_all()
-                    print("[OK] Database tables created!")
-                    
-                    # Create admin if not exists
-                    admin = User.query.filter_by(role='admin').first()
-                    if not admin:
-                        admin_password = bcrypt.generate_password_hash('Hector1234').decode('utf-8')
-                        admin = User(
-                            username='Douglas Yeboah',
-                            email='douglasglayeboah633@gmail.com',
-                            password_hash=admin_password,
-                            role='admin',
-                            phone='0544911993',
-                            is_verified=True
-                        )
-                        db.session.add(admin)
-                        db.session.commit()
-                        print("[OK] Admin created!")
-                    
-                    # Seed products if none exist
-                    if Product.query.count() == 0:
-                        products = [
-                            Product(
-                                name="Broiler Chicken (Live)",
-                                category="chickens",
-                                price=150.00,
-                                stock_quantity=30,
-                                description="Healthy broiler chicken ready for sale. Weight: 2-3kg. Buy more and enjoy discounts!",
-                                image_url=""
-                            ),
-                            Product(
-                                name="Layers Chicken (Live)",
-                                category="chickens",
-                                price=100.00,
-                                stock_quantity=25,
-                                description="Mature laying hen ready for egg production. Buy more and enjoy discounts!",
-                                image_url=""
-                            ),
-                            Product(
-                                name="Crate of Fresh Eggs (30 pcs)",
-                                category="eggs",
-                                price=50.00,
-                                stock_quantity=50,
-                                description="Farm-fresh eggs straight from our healthy layers. 30 eggs per crate. Buy more and enjoy discounts!",
-                                image_url=""
-                            ),
-                        ]
-                        for product in products:
-                            db.session.add(product)
-                        db.session.commit()
-                        print("[OK] Products seeded!")
-                except Exception as e:
-                    print(f"[WARNING] DB init: {e}")
-            app.db_initialized = True
+@app.before_request
+def init_db():
+    """Initialize database on first request"""
+    if not hasattr(app, 'db_initialized'):
+        with app.app_context():
+            try:
+                db.create_all()
+                print("[OK] Database tables created!")
+                
+                # Create admin if not exists
+                admin = User.query.filter_by(role='admin').first()
+                if not admin:
+                    admin_password = bcrypt.generate_password_hash('Hector1234').decode('utf-8')
+                    admin = User(
+                        username='Douglas Yeboah',
+                        email='douglasglayeboah633@gmail.com',
+                        password_hash=admin_password,
+                        role='admin',
+                        phone='0544911993',
+                        is_verified=True
+                    )
+                    db.session.add(admin)
+                    db.session.commit()
+                    print("[OK] Admin created!")
+                
+                # Seed products if none exist
+                if Product.query.count() == 0:
+                    products = [
+                        Product(
+                            name="Broiler Chicken (Live)",
+                            category="chickens",
+                            price=150.00,
+                            stock_quantity=30,
+                            description="Healthy broiler chicken ready for sale. Weight: 2-3kg. Buy more and enjoy discounts!",
+                            image_url=""
+                        ),
+                        Product(
+                            name="Layers Chicken (Live)",
+                            category="chickens",
+                            price=100.00,
+                            stock_quantity=25,
+                            description="Mature laying hen ready for egg production. Buy more and enjoy discounts!",
+                            image_url=""
+                        ),
+                        Product(
+                            name="Crate of Fresh Eggs (30 pcs)",
+                            category="eggs",
+                            price=50.00,
+                            stock_quantity=50,
+                            description="Farm-fresh eggs straight from our healthy layers. 30 eggs per crate. Buy more and enjoy discounts!",
+                            image_url=""
+                        ),
+                    ]
+                    for product in products:
+                        db.session.add(product)
+                    db.session.commit()
+                    print("[OK] Products seeded!")
+            except Exception as e:
+                print(f"[WARNING] DB init: {e}")
+        app.db_initialized = True
 
 
 # ============================================================
