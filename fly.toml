@@ -8,6 +8,9 @@ primary_region = "fra"  # Frankfurt - closest to Ghana
 [env]
   PORT = "8080"
   PYTHON_VERSION = "3.11"
+  BUSINESS_NAME = "F and B Poultry Farm Limited"
+  BUSINESS_PHONE = "0530043569"
+  BUSINESS_EMAIL = "douglasyeboah633@gmail.com"
 
 [http_service]
   internal_port = 8080
